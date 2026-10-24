@@ -24,11 +24,12 @@ jobs:
 
       - name: Add mod sources
         run: |
-          unzip -q purpleclient-forge-1.21.4.zip -d pkg
-          rm -rf mdk/src/main/java
-          cp -r pkg/purpleclient/src/main/java mdk/src/main/java
-          cp -r pkg/purpleclient/src/main/resources/. mdk/src/main/resources/
-          sed -i 's/^mod_id=.*/mod_id=purpleclient/; s/^mod_name=.*/mod_name=Purple Client/; s/^mod_group_id=.*/mod_group_id=com.purple.client/' mdk/gradle.properties
+             ls -la
+             unzip -q "$(ls *.zip | grep -v '^mdk.zip$' | head -n 1)" -d pkg
+             rm -rf mdk/src/main/java
+             cp -r pkg/purpleclient/src/main/java mdk/src/main/java
+             cp -r pkg/purpleclient/src/main/resources/. mdk/src/main/resources/
+             sed -i 's/^mod_id=.*/mod_id=purpleclient/; s/^mod_name=.*/mod_name=Purple Client/; s/^mod_group_id=.*/mod_group_id=com.purple.client/' mdk/gradle.properties
 
       - name: Build
         working-directory: mdk
